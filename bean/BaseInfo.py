@@ -8,7 +8,7 @@ class BaseInfo:
         Column("coding", str.__name__, True),
         Column("farmersName"),
         Column("species"),
-        Column("number", int.__name__),
+        Column("number"),
         Column("name"),
         Column("phone"),
         Column("address"),

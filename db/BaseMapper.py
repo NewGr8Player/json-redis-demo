@@ -20,8 +20,7 @@ class BaseMapper:
         if val_name is None or len(val_name) == 0:
             return None
         try:
-            val = data[val_name]
-            return val
+            return data[val_name]
         except Exception as e:
             return None
 
@@ -172,7 +171,7 @@ class BaseMapper:
             raise Exception("没有任何列")
         col_str = ",".join(col_strs)
         hol_str = ",".join(hol_strs)
-        t_sql = t_sql + col_str + ") values (" + hol_str + ")"
+        t_sql = t_sql + col_str + ") value (" + hol_str + ")"
         ins_pk = DataBase.execute_insert(t_sql, val_strs)
         return ins_pk
 
