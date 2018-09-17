@@ -11,19 +11,31 @@ conf = configparser.ConfigParser()
 conf.read(__conf_file)
 
 
-# Config命名空间下配置获取
 def config_getter(name):
+    """
+    Config命名空间下配置获取
+    :param name: 配置项名称
+    :return: 配置项值
+    """
     val = conf.get(__config_section, name)
     return val
 
 
-# Redis命名空间下配置获取
 def redis_getter(name):
+    """
+    Redis命名空间下配置获取
+    :param name: 配置项名称
+    :return: 配置项值
+    """
     val = conf.get(__redis_section, name)
     return val
 
 
-# Mysql命名空间下配置获取
 def mysql_getter(name):
+    """
+    Mysql命名空间下配置获取
+    :param name: 配置项名称
+    :return: 配置项值
+    """
     val = conf.get(__mysql_section, name)
     return val

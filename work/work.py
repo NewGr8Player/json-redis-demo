@@ -12,16 +12,23 @@ MYSQL_KEY_SET_NAME = 'MYSQL_KEY_SET'
 MYSQL_HASH_KEY_PREFIX = 'MYSQL_HASH_'
 
 
-# 向Redis中写数据
-# _data是单条Json格式数据
 def write_to_redis(_data):
+    """
+    向Redis中写数据
+    TODO
+    :param _data: 单条Json格式数据
+    :return:
+    """
     redis = Redis()
     redis.set(_data['coding'], _data)
 
 
-# 向Mysql中写数据
-# _data是单条Json格式数据
 def write_to_mysql(_data):
+    """
+    向Mysql中写数据
+    :param _data: 单条Json格式数据
+    :return:
+    """
     redis = Redis().get_instance()
     _id = _data['coding']
     redis_hash_key = REDIS_HASH_KEY_PREFIX + _id

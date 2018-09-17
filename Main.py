@@ -16,7 +16,7 @@ EMPTY_DATA_OBJECT = {"total": 0, "rows": []}
 
 
 # 构造url
-def url_constractor(_current, _page_size):
+def url_constructor(_current, _page_size):
     return base_url + '?limit=' + str(_page_size) + '&offset=' + str(_current)
 
 
@@ -49,7 +49,7 @@ def save_to_db(_data):
 # 循环获取
 def looper(current_index=1, page_size=100):
     while current_index > 0:
-        data_analyzer(data_getter(url_constractor(current_index, page_size)))
+        data_analyzer(data_getter(url_constructor(current_index, page_size)))
         current_index += 1
         random_sleep()
 
@@ -69,3 +69,17 @@ def random_sleep():
 # 程序入口
 if __name__ == '__main__':
     looper(1, 10000)
+
+
+# 日志
+def logging_model():
+    """
+    # TODO 整理将print输出替换为日志 import logging
+    https://www.cnblogs.com/Devopser/p/6366975.html
+    :return:
+    """
+    import logging
+    logging.basicConfig(filename='log1.log',
+                        format='%(asctime)s -%(name)s-%(levelname)s-%(module)s:%(message)s',
+                        datefmt='%Y-%m-%d %H:%M:%S %p',
+                        level=logging.DEBUG)
