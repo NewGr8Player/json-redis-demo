@@ -76,6 +76,7 @@ def logging_model():
     """
     # TODO 整理将print输出替换为日志 import logging
     https://www.cnblogs.com/Devopser/p/6366975.html
+    https://blog.csdn.net/chosen0ne/article/details/7319306
     :return:
     """
     import logging
