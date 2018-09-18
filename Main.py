@@ -20,7 +20,8 @@ logger = Logger()
 
 # 构造url
 def url_constructor(_current, _page_size):
-    aim_url = base_url + '?limit=' + str(_page_size) + '&offset=' + str(_current)
+    off_set = (_current - 1) * _page_size
+    aim_url = base_url + '?limit=' + str(_page_size) + '&offset=' + str(off_set)
     logger.debug('目标url:' + aim_url)
     return aim_url
 
@@ -63,9 +64,9 @@ def looper(current_index=1, page_size=100):
 # 随机防Ban
 def random_sleep():
     sleep_time = (
-                         randint(0, 9) * 100 +
-                         randint(0, 9) * 10 +
-                         randint(0, 9)
+                     randint(0, 9) * 100 +
+                     randint(0, 9) * 10 +
+                     randint(0, 9)
                  ) / 1000
     logger.debug('防ban休眠:' + str(sleep_time))
     time.sleep(sleep_time)
