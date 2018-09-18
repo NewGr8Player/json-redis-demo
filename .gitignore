@@ -109,3 +109,4 @@ ENV/
 # ignore ext
 Test.py
 config.ini
+*.log

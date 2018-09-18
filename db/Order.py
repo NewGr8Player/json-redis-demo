@@ -1,5 +1,7 @@
-# Order 排序
 class Order:
+    """
+    排序
+    """
     # 排序字段
     __field = None
     # 排序方向

@@ -1,5 +1,7 @@
-# Column
 class Column:
+    """
+    数据库表的列属性
+    """
     # 字段名
     __name = ""
     # 字段类型

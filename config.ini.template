@@ -14,3 +14,9 @@ mysql_passwd =
 mysql_db =
 mysql_port =
 mysql_charset =
+
+[log]
+log_filename =
+log_logger_level =
+log_console_level =
+log_file_level =

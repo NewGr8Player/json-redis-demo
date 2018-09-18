@@ -1,6 +1,10 @@
 from util.DataBasePool import DataBasePool
 
+from util.Logger import Logger
+
+# 数据库连接池实例
 POOL = DataBasePool()
+logger = Logger()
 
 
 def execute_insert(insert_str, data):
@@ -10,13 +14,14 @@ def execute_insert(insert_str, data):
     :param data:数据
     :return:影响行数
     """
-    if insert_str is None:
-        raise Exception("参数不能为空：sql_str")
-    if len(insert_str) == 0:
-        raise Exception("参数不能为空：sql_str")
+    if insert_str is None or len(insert_str) == 0:
+        info = "参数不能为空：sql_str"
+        logger.error(info)
+        raise Exception(info)
     try:
         return POOL.execute_sql(insert_str, data)
     except Exception as e:
+        logger.error(str(e))
         raise e
 
 
@@ -27,13 +32,14 @@ def execute_update(update_str, data):
     :param data: 数据
     :return: 影响行数
     """
-    if update_str is None:
-        raise Exception("参数不能为空：update_str")
-    if len(update_str) == 0:
-        raise Exception("参数不能为空：update_str")
+    if update_str is None or len(update_str) == 0:
+        info = "参数不能为空：update_str"
+        logger.error(info)
+        raise Exception(info)
     try:
         return POOL.execute_sql(update_str, data)
     except Exception as e:
+        logger.error(str(e))
         raise e
 
 
@@ -44,13 +50,14 @@ def execute_select(select_str, data):
     :param data: 条件数据
     :return: 结果集
     """
-    if select_str is None:
-        raise Exception("参数不能为空：sql_str")
-    if len(select_str) == 0:
-        raise Exception("参数不能为空：sql_str")
+    if select_str is None or len(select_str) == 0:
+        info = "参数不能为空：sql_str"
+        logger.error(info)
+        raise Exception(info)
     try:
         return POOL.execute_query(select_str, data)
     except Exception as e:
+        logger.error(str(e))
         raise e
 
 
@@ -61,11 +68,12 @@ def execute_delete(delete_str, data):
     :param data: 删除条件
     :return: 影响行数
     """
-    if delete_str is None:
-        raise Exception("参数不能为空：sql_str")
-    if len(delete_str) == 0:
-        raise Exception("参数不能为空：sql_str")
+    if delete_str is None or len(delete_str) == 0:
+        info = "参数不能为空：sql_str"
+        logger.error(info)
+        raise Exception(info)
     try:
         return POOL.execute_sql(delete_str, data)
     except Exception as e:
+        logger.error(str(e))
         raise e

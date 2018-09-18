@@ -3,6 +3,9 @@ from DBUtils.PooledDB import PooledDB
 from pymysql.cursors import DictCursor
 
 from util import Config
+from util.Logger import Logger
+
+logger = Logger()
 
 
 # 数据库连接池
@@ -32,10 +35,12 @@ class DataBasePool(object):
         conn = self.__pool.connection()
         cur = conn.cursor()
         try:
+            logger.info(sql)
+            logger.info(args)
             cur.execute(sql, args)
             result = cur.fetchall()
         except Exception as e:
-            print('异常信息:' + str(e))
+            logger.info('异常信息:' + str(e))
         cur.close()
         conn.close()
         return result
@@ -51,10 +56,12 @@ class DataBasePool(object):
         conn = self.__pool.connection()
         cur = conn.cursor()
         try:
+            logger.info(sql)
+            logger.info(args)
             cur.execute(sql, args)
             result = cur.fetchone()
         except Exception as e:
-            print('异常信息:' + str(e))
+            logger.error('异常信息:' + str(e))
         cur.close()
         conn.close()
         return result
@@ -70,11 +77,13 @@ class DataBasePool(object):
         cur = conn.cursor()
         count = 0
         try:
+            logger.info(sql)
+            logger.info(args)
             result = cur.execute(sql, args)
             conn.commit()
             count = result
         except Exception as e:
-            print('异常信息:' + str(e))
+            logger.error('异常信息:' + str(e))
             conn.rollback()
         cur.close()
         conn.close()
@@ -91,11 +100,13 @@ class DataBasePool(object):
         cur = conn.cursor()
         count = 0
         try:
+            logger.info(sql)
+            logger.info(args)
             result = cur.executemany(sql, args)
             conn.commit()
             count = result
         except Exception as e:
-            print('异常信息:' + str(e))
+            logger.error('异常信息:' + str(e))
             conn.rollback()
         cur.close()
         conn.close()

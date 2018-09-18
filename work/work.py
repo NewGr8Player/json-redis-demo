@@ -3,6 +3,7 @@ import operator
 from bean.BaseInfo import BaseInfo
 from db.MapperExecute import MapperExecute
 from util import MD5
+from util.Logger import Logger
 from util.Redis import Redis
 
 REDIS_KEY_SET_NAME = 'REDIS_KEY_SET'
@@ -10,6 +11,8 @@ REDIS_HASH_KEY_PREFIX = 'REDIS_HASH_'
 
 MYSQL_KEY_SET_NAME = 'MYSQL_KEY_SET'
 MYSQL_HASH_KEY_PREFIX = 'MYSQL_HASH_'
+
+logger = Logger()
 
 
 def write_to_redis(_data):
@@ -43,10 +46,10 @@ def write_to_mysql(_data):
     if redis.exists(mysql_hash_key):
         if operator.eq(redis.get(mysql_hash_key), hash_value):
             ret = __m_exe.update_by_pk(BaseInfo(), _data)
-            print('更新影响行数：' + str(ret) + '[' + _id + ']')
+            logger.debug('更新影响行数：' + str(ret) + '[' + _id + ']')
         else:
-            print('数据库与爬取内容相同：' + '[' + _id + ']:' + str(_data))
+            logger.debug('数据库与爬取内容相同：' + '[' + _id + ']:' + str(_data))
     else:
         __m_exe.insert_selective(BaseInfo(), _data)
-        print('新增项数据：' + '[' + _id + ']')
+        logger.debug('新增项数据：' + '[' + _id + ']')
     redis.set(mysql_hash_key, hash_value)

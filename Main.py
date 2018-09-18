@@ -7,6 +7,7 @@ import requests
 from requests import RequestException
 
 from util import Config
+from util.Logger import Logger
 from work.work import write_to_mysql
 
 # 基础路径
@@ -14,10 +15,14 @@ base_url = Config.config_getter('base_url')
 # 空数据对象
 EMPTY_DATA_OBJECT = {"total": 0, "rows": []}
 
+logger = Logger()
+
 
 # 构造url
 def url_constructor(_current, _page_size):
-    return base_url + '?limit=' + str(_page_size) + '&offset=' + str(_current)
+    aim_url = base_url + '?limit=' + str(_page_size) + '&offset=' + str(_current)
+    logger.debug('目标url:' + aim_url)
+    return aim_url
 
 
 # 获取数据
@@ -28,7 +33,7 @@ def data_getter(url):
             ret = response.text  # 不要使用content，content内容为byte，还要转码
             return json.loads(ret, encoding='utf-8')
         else:
-            print('返回错误码:' + str(response.status_code))
+            logger.error('返回错误码:' + str(response.status_code))
             return EMPTY_DATA_OBJECT
     except RequestException:
         return EMPTY_DATA_OBJECT
@@ -49,6 +54,7 @@ def save_to_db(_data):
 # 循环获取
 def looper(current_index=1, page_size=100):
     while current_index > 0:
+        logger.debug('爬取' + str(current_index) + '页')
         data_analyzer(data_getter(url_constructor(current_index, page_size)))
         current_index += 1
         random_sleep()
@@ -61,26 +67,11 @@ def random_sleep():
                          randint(0, 9) * 10 +
                          randint(0, 9)
                  ) / 1000
-    print('防ban休眠:' + str(sleep_time), end='')
+    logger.debug('防ban休眠:' + str(sleep_time))
     time.sleep(sleep_time)
-    print('====结束休眠')
+    logger.debug('结束休眠')
 
 
 # 程序入口
 if __name__ == '__main__':
     looper(1, 10000)
-
-
-# 日志
-def logging_model():
-    """
-    # TODO 整理将print输出替换为日志 import logging
-    https://www.cnblogs.com/Devopser/p/6366975.html
-    https://blog.csdn.net/chosen0ne/article/details/7319306
-    :return:
-    """
-    import logging
-    logging.basicConfig(filename='log1.log',
-                        format='%(asctime)s -%(name)s-%(levelname)s-%(module)s:%(message)s',
-                        datefmt='%Y-%m-%d %H:%M:%S %p',
-                        level=logging.DEBUG)

@@ -1,8 +1,10 @@
 from db.Column import Column
 
 
-# BasicInfo 基础信息
 class BaseInfo:
+    """
+    基础数据信息Bean
+    """
     # 数据表字段
     __cols = [
         Column("coding", str.__name__, True),

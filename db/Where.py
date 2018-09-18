@@ -1,5 +1,7 @@
-# Where 拼接查询条件
 class Where:
+    """
+    查询条件
+    """
     # 查询字段名
     __field = None
     # 查询表达式
