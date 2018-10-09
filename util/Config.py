@@ -43,5 +43,10 @@ def mysql_getter(name):
 
 
 def log_getter(name):
+    """
+    Log命名空间下配置获取
+    :param name: 配置项名称
+    :return: 配置项值
+    """
     val = conf.get(__log_section, name)
     return val
