@@ -110,3 +110,4 @@ ENV/
 Test.py
 config.ini
 *.log
+*.html
