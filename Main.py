@@ -36,7 +36,8 @@ def data_getter(url):
         else:
             logger.error('返回错误码:' + str(response.status_code))
             return EMPTY_DATA_OBJECT
-    except RequestException:
+    except RequestException as e:
+        logger.error('异常终止！' + str(e))
         return EMPTY_DATA_OBJECT
 
 
@@ -75,4 +76,4 @@ def random_sleep():
 
 # 程序入口
 if __name__ == '__main__':
-    looper(1, 10000)
+    looper(1, 100)
