@@ -1,4 +1,5 @@
 import operator
+import json
 
 from bean.BaseInfo import BaseInfo
 from db.MapperExecute import MapperExecute
@@ -39,7 +40,7 @@ def write_to_mysql(_data):
 
     hash_value = _id + MD5.obj_md5(_data)
 
-    redis.set(_id, _data)  # redis中的对象
+    redis.set(_id, json.dumps(_data))  # redis中的对象
     redis.set(redis_hash_key, hash_value)  # redis中对象的特征值
 
     __m_exe = MapperExecute()

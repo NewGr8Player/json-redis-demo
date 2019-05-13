@@ -11,7 +11,7 @@ class Redis:
             host=Config.redis_getter("redis_host"),
             password=Config.redis_getter("redis_passwd"),
             port=int(Config.redis_getter("redis_port")),
-            db=3)
+            db=Config.redis_getter("redis_no"))
 
     # 使用Redis连接池操作
     def get_instance(self):

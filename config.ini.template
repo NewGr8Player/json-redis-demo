@@ -6,6 +6,7 @@ redis_host =
 redis_passwd =
 redis_port =
 redis_charset =
+redis_no =
 
 [mysql]
 mysql_host =
