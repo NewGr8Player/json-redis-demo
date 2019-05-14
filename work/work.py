@@ -47,10 +47,10 @@ def write_to_mysql(_data):
     if redis.exists(mysql_hash_key):
         if operator.eq(redis.get(mysql_hash_key), hash_value):
             ret = __m_exe.update_by_pk(BaseInfo(), _data)
-            logger.debug('更新影响行数：' + str(ret) + '[' + _id + ']')
+            logger.info('更新影响行数：' + str(ret) + '[' + _id + ']')
         else:
             logger.debug('数据库与爬取内容相同：' + '[' + _id + ']:' + str(_data))
     else:
         __m_exe.insert_selective(BaseInfo(), _data)
-        logger.debug('新增项数据：' + '[' + _id + ']')
+        logger.info('新增项数据：' + '[' + _id + ']')
     redis.set(mysql_hash_key, hash_value)

@@ -56,7 +56,7 @@ def save_to_db(_data):
 # 循环获取
 def looper(current_index=1, page_size=100):
     while current_index > 0:
-        logger.debug('爬取' + str(current_index) + '页')
+        logger.info('爬取' + str(current_index) + '页')
         data_analyzer(data_getter(url_constructor(current_index, page_size)))
         current_index += 1
         random_sleep()
